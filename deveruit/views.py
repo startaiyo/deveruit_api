@@ -1,11 +1,12 @@
 from django.shortcuts import render
 from rest_framework import generics, authentication, permissions
 from deveruit import serializers
-from deveruit.models import Recruitment, Request, Message
+from deveruit.models import Recruitment, Request, Message, User
 from rest_framework import viewsets
 
 
-class CreateUserView(generics.CreateAPIView):
+class CreateUserView(generics.ListCreateAPIView):
+    queryset = User.objects.all()
     serializer_class = serializers.UserSerializer
 
 class RecruitmentViewSet(viewsets.ModelViewSet):
