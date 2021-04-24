@@ -65,6 +65,7 @@ ROOT_URLCONF = 'deveruit_api.urls'
 
 CORS_ORIGIN_WHITELIST = [
     "http://localhost:3000"
+    "https://github-auth-go-api.herokuapp.com"
 ]
 
 TEMPLATES = [
