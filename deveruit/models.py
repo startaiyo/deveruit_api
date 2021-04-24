@@ -5,19 +5,19 @@ from django.conf import settings
 
 class UserManager(BaseUserManager):
 
-    def create_user(self, github_url, password=None, **extra_fields):
+    def create_user(self, github_name, password=None, **extra_fields):
 
-        if not github_url:
-            raise ValueError('Users must have an github url')
+        if not github_name:
+            raise ValueError('Users must have a github name')
  
-        user = self.model(github_url=github_url, **extra_fields)
+        user = self.model(github_name=github_name, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
         return user
  
-    def create_superuser(self, github_url, password=None):
+    def create_superuser(self, github_name, password=None):
         
-        user = self.create_user(github_url, password)
+        user = self.create_user(github_name, password)
         user.is_staff = True
         user.is_superuser = True
         user.save(using=self._db)
@@ -27,20 +27,19 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     email = models.EmailField(
         max_length=255,
-        unique=True,
     )
-    github_url = models.URLField(unique=True)
-    image = models.ImageField(upload_to='image/')
+    github_name = models.CharField(max_length=100, unique=True)
+    image = models.CharField(max_length=200)
     name = models.CharField(max_length=200)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
  
     objects = UserManager()
  
-    USERNAME_FIELD = 'github_url'
+    USERNAME_FIELD = 'github_name'
  
     def __str__(self):
-        return self.github_url
+        return self.github_name
 
 
 class Recruitment(models.Model):
