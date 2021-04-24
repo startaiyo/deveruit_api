@@ -4,10 +4,13 @@ certifi==2020.12.5
 chardet==4.0.0
 coreapi==2.3.3
 coreschema==0.0.4
+dj-database-url==0.5.0
 Django==3.0.14
 django-cors-headers==3.7.0
+django-heroku==0.3.1
 django-rest-swagger==2.2.0
 djangorestframework==3.11.2
+gunicorn==20.1.0
 idna==2.10
 isort==5.8.0
 itypes==1.2.0
@@ -17,6 +20,7 @@ MarkupSafe==1.1.1
 mccabe==0.6.1
 openapi-codec==1.3.2
 Pillow==2.2.2
+psycopg2-binary==2.8.6
 pylint==2.7.4
 pylint-django==2.4.3
 pylint-plugin-utils==0.6
@@ -27,9 +31,5 @@ sqlparse==0.4.1
 toml==0.10.2
 uritemplate==3.0.1
 urllib3==1.26.4
+whitenoise==5.2.0
 wrapt==1.12.1
-gunicorn
---install-option="--no-deps" django-heroku
-dj-database-url
-psycopg2-binary
-whitenoise
