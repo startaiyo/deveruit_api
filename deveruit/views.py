@@ -54,10 +54,11 @@ def msg_create(request,request_id):
     msg = Message.objects.create(request_id=request_id)
     req = Request.objects.get(id=request_id)
     recruitment = Recruitment.objects.get(id=req.recruit_id)
-    if request.is_approved:
+    if req.is_approved:
         msg.message = recruitment.approval_msg
     else:
         msg.message = recruitment.refusal_msg
-    msg.save()
+    if msg.is_valid:
+        msg.save()
     selializer = MessageSerializer(msg)
     return JsonResponse(selializer.data)

@@ -56,7 +56,7 @@ class Recruitment(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.created_user
+        return self.title
 
 class Request(models.Model):
     applicant = models.ForeignKey(
@@ -90,7 +90,7 @@ class Message(models.Model):
     )
     is_read = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)    
-    message = models.CharField(max_length=200)
+    message = models.CharField(max_length=200,default="メッセージです")
     #追加
     recruit = models.ForeignKey(Recruitment,on_delete=models.CASCADE)
     request = models.ForeignKey(Request,on_delete=models.CASCADE)
