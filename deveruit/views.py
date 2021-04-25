@@ -3,7 +3,6 @@ from rest_framework import generics, authentication, permissions
 from deveruit import serializers
 from deveruit.models import Recruitment, Request, Message, User
 from rest_framework import viewsets
-from . import models
 from django.http import JsonResponse
 
 class CreateUserView(generics.ListCreateAPIView):
@@ -60,5 +59,5 @@ def msg_create(request,request_id):
         msg.message = recruitment.refusal_msg
     if msg.is_valid:
         msg.save()
-    selializer = MessageSerializer(msg)
+    selializer = serializers.MessageSerializer(msg)
     return JsonResponse(selializer.data)
