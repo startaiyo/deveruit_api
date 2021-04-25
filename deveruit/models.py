@@ -70,6 +70,7 @@ class Request(models.Model):
     is_approved = models.BooleanField(default=False)
     is_processed = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
+    #追加
     recruit = models.ForeignKey(Recruitment,on_delete=models.CASCADE)
 
     class Meta:
@@ -90,6 +91,7 @@ class Message(models.Model):
     is_read = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)    
     message = models.CharField(max_length=200)
+    #追加
     recruit = models.ForeignKey(Recruitment,on_delete=models.CASCADE)
     request = models.ForeignKey(Request,on_delete=models.CASCADE)
 

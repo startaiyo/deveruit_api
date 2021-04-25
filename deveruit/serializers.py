@@ -31,3 +31,5 @@ class MessageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Message
         fields = ('id', 'sender', 'receiver', 'is_read', 'created_at')
+
+

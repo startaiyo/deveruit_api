@@ -9,8 +9,10 @@ router.register('recruit', views.RecruitmentViewSet, basename="recruit")
 router.register('myrecruit', views.MyRecruitmentViewSet, basename="myrecruit")
 router.register('request', views.RequestViewSet, basename="request")
 router.register('message', views.MessageViewSet, basename="message")
-router.register('request/<int:msg_id>',views.RequestToMessageViewSet,basename="requestmsg")
+router.register('request/<int:request_id>'),views.msg_create,name="msg_create")
+router.register()
 
 urlpatterns = [
-    path('', include(router.urls))
+    path('', include(router.urls)),
+    path('request/<int:request_id>',views.msg_create,name="msg_create"),
 ]
