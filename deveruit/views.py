@@ -49,3 +49,13 @@ class MessageViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         return self.queryset.filter(receiver=self.request.user)
 
+class RequestToMessageViewSet(viewsets.ModelViewSet,msg_id):
+    msg = Message.objects.get(id=msg_id)
+    request = Request.objects.get(id=msg.request_id)
+    recruitment = Recruitment.objects.get(id=request.recruit_id)
+    
+    if request.is_approved:
+        msg.message = recruitment.approval_msg
+    else:
+        msg.message = recruitment.refusal_msg
+    msg.save()

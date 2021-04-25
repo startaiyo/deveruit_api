@@ -9,6 +9,7 @@ router.register('recruit', views.RecruitmentViewSet, basename="recruit")
 router.register('myrecruit', views.MyRecruitmentViewSet, basename="myrecruit")
 router.register('request', views.RequestViewSet, basename="request")
 router.register('message', views.MessageViewSet, basename="message")
+router.register('request/<int:msg_id>',views.RequestToMessageViewSet,basename="requestmsg")
 
 urlpatterns = [
     path('', include(router.urls))
