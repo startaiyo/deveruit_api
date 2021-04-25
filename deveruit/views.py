@@ -3,7 +3,8 @@ from rest_framework import generics, authentication, permissions
 from deveruit import serializers
 from deveruit.models import Recruitment, Request, Message, User
 from rest_framework import viewsets
-
+from . import models
+from django.http import JsonResponse
 
 class CreateUserView(generics.ListCreateAPIView):
     queryset = User.objects.all()
@@ -49,13 +50,14 @@ class MessageViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         return self.queryset.filter(receiver=self.request.user)
 
-class RequestToMessageViewSet(viewsets.ModelViewSet,msg_id):
-    msg = Message.objects.get(id=msg_id)
-    request = Request.objects.get(id=msg.request_id)
-    recruitment = Recruitment.objects.get(id=request.recruit_id)
-    
+def msg_create(request,request_id):
+    msg = Message.objects.create(request_id=request_id)
+    req = Request.objects.get(id=request_id)
+    recruitment = Recruitment.objects.get(id=req.recruit_id)
     if request.is_approved:
         msg.message = recruitment.approval_msg
     else:
         msg.message = recruitment.refusal_msg
     msg.save()
+    selializer = MessageSerializer(msg)
+    return JsonResponse(selializer.data)
